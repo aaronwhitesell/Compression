@@ -1,0 +1,10 @@
+# Excluded Files
+alphabet.txt
+compressed.txt
+decompressed.txt
+
+# Excluded Directories
+.vs/
+Debug/
+Output/
+Release/
