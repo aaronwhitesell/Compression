@@ -19,8 +19,8 @@ namespace Compression
 	{
 		std::cout << "Compression\n";
 
-		uint8 inbuf[bufSize];
-		uint8 outbuf[bufSize];
+		uint8 inbuf[bufSize] = {0};
+		uint8 outbuf[bufSize] = {0};
 
 		// Determine input's size
 		in.seekg(0, std::ios::end);
@@ -32,6 +32,11 @@ namespace Compression
 			// To remove limitation implement chunking
 			std::cout << "Input size must be between 0 and 2 GB\n";
 			return EXIT_FAILURE;
+		}
+
+		if (inputSize == std::streampos(0)) {
+			// Empty stream, so do nothing
+			return EXIT_SUCCESS;
 		}
 
 		// Init the z_stream
@@ -116,8 +121,8 @@ namespace Compression
 	{
 		std::cout << "Decompression\n";
 
-		uint8 inbuf[bufSize];
-		uint8 outbuf[bufSize];
+		uint8 inbuf[bufSize] = {0};
+		uint8 outbuf[bufSize] = {0};
 
 		in.seekg(0, std::ios::end);
 		const std::streampos inputSize = in.tellg();
@@ -128,6 +133,11 @@ namespace Compression
 			// To remove limitation implement chunking
 			std::cout << "Input size must be between 0 and 2 GB\n";
 			return EXIT_FAILURE;
+		}
+
+		if (inputSize == std::streampos(0)) {
+			// Empty stream, so do nothing
+			return EXIT_SUCCESS;
 		}
 
 		// Init the z_stream
